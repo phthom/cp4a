@@ -1,4 +1,4 @@
-#Cloud Pak for Applications Labs
+#  Cloud Pak for Applications Labs
 
 ![image-20191014232224212](images/image-20191014232224212-1088144.png)
 
