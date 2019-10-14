@@ -8,7 +8,7 @@
 
 
 
-## Introduction
+## Int roduction
 
 During this lab we are going to connect to an **OpenShift** Cluster thru the Web Console or using CLI. Then we will deploy a sample application.
 
@@ -20,7 +20,7 @@ Don't use someone else userID except if the instructor ask you to do so.
 
 
 
-##Task #1 - Connecting to the Web Console
+## Task #1 - Connecting to the Web Console
 
 Use the following URL with you credentials (labuserxx, passwordxx) to connect to the OpenShift Web Console :
 
@@ -42,7 +42,7 @@ Type your credentials
 
 
 
-## Task #2 - Installing the OpenShift CLI
+##  Task #2 - Installing the OpenShift CLI
 
 In fact, you will need to use the **oc** command during the labs. If you need some more information during the installation, go to that link
 
