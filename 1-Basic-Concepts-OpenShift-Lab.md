@@ -114,15 +114,9 @@ You don't have any projects. You can try to create a new project, by running
 #
 ```
 
-Then create a new project for this user :
+> **You don't need to create a new project because a new secure project space has already been created for you.** 
 
-```
-oc new-project labproj<xx>
-```
-
-where **xx** is your number. 
-
-Results as an example:
+If you had to create a new project, you would have typed : oc new-project labproj<xx> where **xx** is your number and here are the results as an example:
 
 ```shell
 oc new-project labproj01
@@ -135,7 +129,7 @@ You can add applications to this project with the 'new-app' command. For example
 to build a new example application in Ruby.
 ```
 
-A new secure project space has been created for you. 
+
 
 To understand what project you are using:
 
