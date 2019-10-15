@@ -64,9 +64,23 @@ The master reference is on the following link:
 https://appsody.dev/docs/getting-started/installation
 ```
 
+
+
+### Check Docker has been installed on your laptop
+
 Because Appsody depends on Docker, ensure that you have [Docker](https://docs.docker.com/get-started/) installed and the Docker daemon running on your system. 
 
-###Installing on macOS
+On MacOS
+
+<https://docs.docker.com/docker-for-mac/install/>
+
+On Windows
+
+<https://docs.docker.com/docker-for-windows/install/>
+
+
+
+###Installing Appsody on macOS
 
 Follow these steps:
 
@@ -80,7 +94,7 @@ brew install appsody/appsody/appsody
 
 This command creates a brew tap for the `appsody/appsody` repo and installs the `appsody` formula.
 
-###Installing on Windows
+###Installing Appsody on Windows
 
 Note: Appsody runs only on Windows 10 Professional and Windows 10 Enterprise editions. If you are running Windows 10 Enterprise with authentication through Azure Active Directory, please follow the additional instructions in the page [Appsody and Docker Desktop on Windows 10](https://appsody.dev/docs/docker-windows-aad).
 
@@ -161,7 +175,7 @@ Use "appsody [command] --help" for more information about a command.
 
 
 
-Appsody has **3** main subcommands that we use at different stages : init, build, run, deploy.
+Appsody has **4** main subcommands that we use at different stages : init, build, run, deploy.
 
 
 
@@ -405,9 +419,11 @@ http://localhost:3000
 
 ![image-20191012173918846](images/image-20191012173918846-0894758.png)
 
+
+
 ## Task #6 - Installing Codewind
 
-Installing **Codewind**, you need to install first Eclipse or Visual Studio Code. For the simplicity, we decided to install VS code for this exercise. 
+Installing **Codewind**, you need to install first **Eclipse** or **Visual Studio Code**. For the simplicity, we decided to install Visual Studio code for this exercise. 
 
 If you don't have **Visual Studio Code** on your laptop, go to that link (the installation is very quick):
 
@@ -507,7 +523,9 @@ Then a performance test is running on your application:
 
 And after a few seconds, you see the results. 
 
-Rehiterate your tests with different names:
+You can repeat this operation several times with 2#Test and 3#Test.
+
+Also tick all the boxes on the right pane:
 
 ![image-20191012192754537](images/image-20191012192754537-0901274.png)
 
@@ -536,7 +554,7 @@ oc project
 Using project "labproj01" on server "https://nice-cluster-3f022ac5fd-master-0.IBM-OpenShift.cloud:8443".
 ```
 
-Your OpenShift registry is located at : docker-registry-default.apps.158.176.105.11.xip.io
+Your OpenShift registry is located at : **docker-registry-default.apps.158.176.105.11.xip.io**
 
 In your application directory **newappproj**, login to your Docker registry in your cluster:
 
