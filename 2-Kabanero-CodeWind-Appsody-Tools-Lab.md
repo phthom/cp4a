@@ -569,6 +569,12 @@ WARNING! Using --password via the CLI is insecure. Use --password-stdin.
 Login Succeeded
 ```
 
+
+
+> If you receive an error message with X509,  you must add the **client-ca.crt** certificate on your system. This file is in the github in the same repository. 
+
+
+
 Now you can deploy your appliocation to the remote OpenShift cluster in your project (**change xx** with your number)
 
 ```bash
@@ -714,6 +720,12 @@ Deployed project running at mynewapp-labproj01.apps.158.176.105.11.xip.io
 Using applicationImage of: docker-registry-default.apps.158.176.105.11.xip.io/labproj01/mynewapp
 Pushing docker image docker-registry-default.apps.158.176.105.11.xip.io/labproj01/mynewapp
 ```
+
+
+
+> If you receive an error message with X509,  you must add the **client-ca.crt** certificate on your system. This file is in the github in the same repository. 
+
+
 
 You can now get access to your application:
 
