@@ -36,17 +36,19 @@ All these components are working all together.
 
 Use the following URL with you credentials (labuserxx, passwordxx) to connect to the OpenShift Web Console :
 
-[https://nice-cluster-3f022ac5fd-master-0.IBM-OpenShift.cloud:8443](https://nice-cluster-3f022ac5fd-master-0.ibm-openshift.cloud:8443/)
+[https://<cluster master hostname>:8443](https://<cluster master hostname>:8443)
 
 ![image-20191008154755641](images/image-20191008154755641-0542475.png)
 
-Type your credentials
+Enter your credentials
 
 ![image-20191008154849227](images/image-20191008154849227-0542529.png)
 
 
 
-**<u>Important note</u>** : modify your /etc/hosts and add the following line otherwise you will get a redirection problem. 
+**<u>Important note</u>** : modify your /etc/hosts and add the following line otherwise you will get a redirection problem. This line will be given by the instructor.
+
+For example:
 
 ```
 158.176.105.4 nice-cluster-3f022ac5fd-master-0.IBM-OpenShift.cloud
@@ -185,7 +187,9 @@ Before creating our first application with Appsody, let's look at the collection
 
 Use this link to collect a few information on Kabanero Instance (running in our Cluster)
 
-https://ibm-cp-applications.apps.158.176.105.11.xip.io/
+Get the infra node IP address from the instructor.
+
+[https://ibm-cp-applications.apps.<infraIP@>.xip.io/](https://ibm-cp-applications.apps.<infraIP@>.xip.io/)
 
 ![image-20191012161106600](images/image-20191012161106600-0889466.png)
 
@@ -538,7 +542,7 @@ Also tick all the boxes on the right pane:
 Back to the terminal or the command line window. Check that you are still logged to your cluster:
 
 ```bash
-oc login https://nice-cluster-3f022ac5fd-master-0.IBM-OpenShift.cloud:8443
+oc login https://<cluster master hostname>:8443
 ```
 
 Check or re-assign your project:
@@ -554,7 +558,7 @@ oc project
 Using project "labproj01" on server "https://nice-cluster-3f022ac5fd-master-0.IBM-OpenShift.cloud:8443".
 ```
 
-Your OpenShift registry is located at : **docker-registry-default.apps.158.176.105.11.xip.io**
+Your OpenShift registry is located at : **docker-registry-default.apps.<infraIP@>.xip.io**
 
 In your application directory **newappproj**, login to your Docker registry in your cluster:
 
@@ -578,7 +582,7 @@ Login Succeeded
 Now you can deploy your appliocation to the remote OpenShift cluster in your project (**change xx** with your number)
 
 ```bash
-appsody deploy -t docker-registry-default.apps.158.176.105.11.xip.io/labproj<xx>/mynewapp --push -n labproj<xx>
+appsody deploy -t docker-registry-default.apps.<infraIP@>.xip.io/labproj<xx>/mynewapp --push -n labproj<xx>
 ```
 
 Results
@@ -730,7 +734,7 @@ Pushing docker image docker-registry-default.apps.158.176.105.11.xip.io/labproj0
 You can now get access to your application:
 
 ```https
-http://mynewapp-labproj01.apps.158.176.105.11.xip.io
+http://mynewapp-labproj<xx>.apps.<infraIP@>.xip.io
 ```
 
  ![image-20191012185518963](images/image-20191012185518963-0899319.png)

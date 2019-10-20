@@ -22,13 +22,13 @@ Don't use someone else userID except if the instructor ask you to do so.
 
 ## Task #1 - Connecting to the Web Console
 
-Use the following URL with you credentials (labuserxx, passwordxx) to connect to the OpenShift Web Console :
+Use the following URL (from the instructor) with you credentials (labuserxx, passwordxx) to connect to the OpenShift Web Console :
 
-[https://nice-cluster-3f022ac5fd-master-0.IBM-OpenShift.cloud:8443](https://nice-cluster-3f022ac5fd-master-0.ibm-openshift.cloud:8443/)
+[https://<cluster master hostname>:8443](https://<cluster master hostname>:8443)
 
 ![image-20191008154755641](images/image-20191008154755641-0542475.png)
 
-Type your credentials
+Type your credentials (username, password)
 
 ![image-20191008154849227](images/image-20191008154849227-0542529.png)
 
@@ -36,8 +36,10 @@ Type your credentials
 
 **<u>Important note</u>** : You need to modify your /etc/hosts and add the following line otherwise you will get a redirection or a page-notfound problem (404, 403 or 401). 
 
+As an example (from the instructor) :
+
 ```
-158.176.105.4 nice-cluster-3f022ac5fd-master-0.IBM-OpenShift.cloud
+158.176.105.4 cluster-3f022ac5fd-master-0.ibm.cloud
 ```
 
 
@@ -96,10 +98,10 @@ If you use **MacOS** or Linux, complete the following steps to add the binaries 
 Open a terminal or a command line console and type:
 
 ```shell
-oc login https://nice-cluster-3f022ac5fd-master-0.IBM-OpenShift.cloud:8443
+oc login https://<Cluster Master Hostname>:8443
 ```
 
-Then enter your credentials (userID and password).
+Then enter your credentials (userID and password) as an example:
 
 ```shell
 Authentication required for https://nice-cluster-3f022ac5fd-master-0.IBM-OpenShift.cloud:8443 (openshift)
@@ -116,17 +118,19 @@ You don't have any projects. You can try to create a new project, by running
 
 > **You don't need to create a new project because a new secure project space has already been created for you.** 
 
-If you had to create a new project, you would have typed : oc new-project labproj<xx> where **xx** is your number and here are the results as an example:
+If you had to create a new project, you would have typed : oc new-project labproj<xx> where **xx** is your number.
+
+To switch to your project:
+
+``` bash
+oc project labproj<XX>
+```
+
+Results as an example:
 
 ```shell
-oc new-project labproj01
+oc project labproj01
 Now using project "labproj01" on server "https://nice-cluster-3f022ac5fd-master-0.IBM-OpenShift.cloud:8443".
-
-You can add applications to this project with the 'new-app' command. For example, try:
-
-    oc new-app centos/ruby-25-centos7~https://github.com/sclorg/ruby-ex.git
-
-to build a new example application in Ruby.
 ```
 
 
@@ -152,8 +156,6 @@ In the case of using multiple projects, you can change from one project to anoth
 ``` shell
 oc project <another project>
 ```
-
-
 
 Now you are ready to go thru the exercises. 
 
