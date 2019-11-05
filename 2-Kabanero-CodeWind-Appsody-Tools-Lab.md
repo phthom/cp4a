@@ -1,3 +1,5 @@
+
+
 # Kabanero-CodeWind-Appsody Tools 
 
 # in the IBM Cloud Pak for Applications 
@@ -32,11 +34,13 @@ All these components are working all together.
 
 
 
-##Task #1 - Connect to your OpenShift web console
+## Task #1 - Connect to your OpenShift web console
 
 Use the following URL with you credentials (labuserxx, passwordxx) to connect to the OpenShift Web Console :
 
-[https://<cluster master hostname>:8443](https://<cluster master hostname>:8443)
+`https://<cluster master hostname>:8443`
+
+
 
 ![image-20191008154755641](images/image-20191008154755641-0542475.png)
 
@@ -82,7 +86,7 @@ On Windows
 
 
 
-###Installing Appsody on macOS
+## Installing Appsody on macOS
 
 Follow these steps:
 
@@ -96,7 +100,9 @@ brew install appsody/appsody/appsody
 
 This command creates a brew tap for the `appsody/appsody` repo and installs the `appsody` formula.
 
-###Installing Appsody on Windows
+ 
+
+##  Installing Appsody on Windows
 
 Note: Appsody runs only on Windows 10 Professional and Windows 10 Enterprise editions. If you are running Windows 10 Enterprise with authentication through Azure Active Directory, please follow the additional instructions in the page [Appsody and Docker Desktop on Windows 10](https://appsody.dev/docs/docker-windows-aad).
 
@@ -130,7 +136,7 @@ For the other Operating Systems, look at the following page:
 
 
 
-### Testing Appsody
+## Testing Appsody
 
 Open a terminal or a command line console and type:
 
@@ -329,6 +335,8 @@ This has downloaded a project template that provides a very basic project struct
 ``` bash
 tree .
 ```
+
+> if tree command is not installed, use yum install tree or brew install tree 
 
 Results
 
@@ -561,6 +569,12 @@ Using project "labproj01" on server "https://nice-cluster-3f022ac5fd-master-0.IB
 Your OpenShift registry is located at : **docker-registry-default.apps.<infraIP@>.xip.io**
 
 In your application directory **newappproj**, login to your Docker registry in your cluster:
+
+``` 
+docker login -u openshift -p $(oc whoami -t) docker-registry-default.apps.<infraIP>.xip.io
+```
+
+Example:
 
 ```
 docker login -u openshift -p $(oc whoami -t) docker-registry-default.apps.158.176.105.11.xip.io

@@ -24,7 +24,7 @@ Don't use someone else userID except if the instructor ask you to do so.
 
 Use the following URL (from the instructor) with you credentials (labuserxx, passwordxx) to connect to the OpenShift Web Console :
 
-[https://<cluster master hostname>:8443](https://<cluster master hostname>:8443)
+`https://<cluster master hostname>:8443`
 
 ![image-20191008154755641](images/image-20191008154755641-0542475.png)
 
@@ -93,7 +93,7 @@ If you use **MacOS** or Linux, complete the following steps to add the binaries 
 
 
 
-### 3. Check the new commands
+### 3. Check the new command
 
 Open a terminal or a command line console and type:
 
@@ -394,7 +394,7 @@ To get access to the application, click on the route:
 
 ![image-20191012140424492](images/image-20191012140424492-0881864.png)
 
-Click on the `nodes-ex, #1` blue link, then you will see some more details on the application: 
+Click on the `nodejs-ex, #1` blue link, then you will see some more details on the application: 
 
 ![image-20191012140537676](images/image-20191012140537676-0881937.png)
 
@@ -470,7 +470,7 @@ To learn about monitoring of your application, on the left pane, click on the `M
 
 ![image-20191012145519383](images/image-20191012145519383-0884919.png)
 
-You should see all the resources involved into your applcation in the cluster:
+You should see all the resources involved into your application in the cluster:
 
 ![image-20191012145611519](images/image-20191012145611519-0884971.png)
 
