@@ -34,12 +34,12 @@ Type your credentials (username, password)
 
 
 
-**<u>Important note</u>** : You need to modify your /etc/hosts and add the following line otherwise you will get a redirection or a page-notfound problem (404, 403 or 401). 
+**<u>Important note</u>** : You need to modify your **/etc/hosts** and add the following line at the end of the file otherwise you will get a redirection or a page-notfound problem (404, 403 or 401). 
 
-As an example (from the instructor) :
+As an example (from the instructor) in the /etc/hosts (MacOS or Linux) or c:\Windows\System32\Drivers\etc\hosts (on Windows)  :
 
 ```
-158.176.105.4 cluster-3f022ac5fd-master-0.ibm.cloud
+158.176.105.4    niced-m0    niced-m0.ibm.ws
 ```
 
 
