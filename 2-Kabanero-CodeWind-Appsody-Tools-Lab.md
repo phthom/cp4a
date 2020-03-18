@@ -295,6 +295,7 @@ To learn more about this, go to [stack structure](https://appsody.dev/docs/stack
 Create a new directory for your project:
 
 ```bash
+cd
 mkdir codewind-workspace
 cd codewind-workspace
 mkdir mynewapp
@@ -547,6 +548,29 @@ Also tick all the boxes on the right pane:
 
 ## Task #9 - Deploy your app
 
+Before you start deploying the application, you need to copy the certificate from the GitHub to your laptop.
+
+**<u>IMPORTANT STEP</u>**
+
+The certificate file is **client-ca.crt**. Download this certificate from the GitHub repository to your laptop.
+
+Then **double-click** on the certificate file and import the certificate into your security operating system (this could be a different process if you are using Windows or MacOS).  
+
+Once this certificate is trusted, you should :
+
+- Restart Docker
+- Restart the terminal that you are using
+
+
+
+> IMPORTANT: this certificate is mandatory if you want to deploy the image to a secure registry.
+>
+> In the appendix, there is also another procedure to download and activate the certificate.
+>
+> This file **/etc/origin/node/client-ca.crt** is located in the master.
+
+
+
 Back to the terminal or the command line window. Check that you are still logged to your cluster:
 
 ```bash
@@ -571,13 +595,13 @@ Your OpenShift registry is located at : **docker-registry-default.apps.<infraIP@
 In your application directory **newappproj**, login to your Docker registry in your cluster:
 
 ``` 
-docker login -u openshift -p $(oc whoami -t) docker-registry-default.apps.<infraIP>.xip.io
+docker login docker-registry-default.apps.<infraIP>.xip.io -u openshift -p $(oc whoami -t) 
 ```
 
 Example:
 
 ```
-docker login -u openshift -p $(oc whoami -t) docker-registry-default.apps.158.176.105.11.xip.io
+docker login docker-registry-default.apps.158.176.105.11.xip.io -u openshift -p $(oc whoami -t) 
 ```
 
 Results:
@@ -593,155 +617,53 @@ Login Succeeded
 
 
 
+Be sure to be on your application directory:
+
+```bash
+cd
+cd codewind-workspace/mynewapp
+```
+
+
+
 Now you can deploy your appliocation to the remote OpenShift cluster in your project (**change xx** with your number)
 
 ```bash
-appsody deploy -t docker-registry-default.apps.<infraIP@>.xip.io/labproj<xx>/mynewapp --push -n labproj<xx>
-```
-
-Results
-
-```
-appsody deploy -t docker-registry.default.svc:5000/default/mynewapp -n labproj01
-Attempting to get resource from Kubernetes ...
-Running command: kubectl get pods -o=jsonpath='{.items[?(@.metadata.labels.name=="appsody-operator")].metadata.namespace}’ --all-namespaces
-Attempting to get resource from Kubernetes ...
-Running command: kubectl get deployments -o=jsonpath='{.items[?(@.metadata.name=="appsody-operator")].metadata.namespace}' -n default
-Attempting to get resource from Kubernetes ...
-Running command: kubectl get pod -o=jsonpath='{.items[?(@.metadata.labels.name=="appsody-operator")].metadata.name}' -n default
-Attempting to get resource from Kubernetes ...
-Running command: kubectl exec -n default -it appsody-operator-5d6d9f977-qsk7s -- /bin/printenv WATCH_NAMESPACE
-Attempting to get resource from Kubernetes ...
-Running command: kubectl get deployments -o=jsonpath='{.items[?(@.metadata.name=="appsody-operator")].metadata.namespace}' -n kabanero
-Attempting to get resource from Kubernetes ...
-Running command: kubectl get pod -o=jsonpath='{.items[?(@.metadata.labels.name=="appsody-operator")].metadata.name}' -n kabanero
-Attempting to get resource from Kubernetes ...
-Running command: kubectl exec -n kabanero -it appsody-operator-549fd759c8-4m8xz -- /bin/printenv WATCH_NAMESPACE
-Attempting to get resource from Kubernetes ...
-Running command: kubectl get deployments -o=jsonpath='{.items[?(@.metadata.name=="appsody-operator")].metadata.namespace}' -n labproj01
-There are no deployments with appsody-operator
-Attempting to get resource from Kubernetes ...
-Running command: kubectl get pods -o=jsonpath='{.items[?(@.metadata.labels.name=="appsody-operator")].metadata.namespace}’ --all-namespaces
-Attempting to get resource from Kubernetes ...
-Running command: kubectl get deployments -o=jsonpath='{.items[?(@.metadata.name=="appsody-operator")].metadata.namespace}' -n default
-Attempting to get resource from Kubernetes ...
-Running command: kubectl get pod -o=jsonpath='{.items[?(@.metadata.labels.name=="appsody-operator")].metadata.name}' -n default
-Attempting to get resource from Kubernetes ...
-Running command: kubectl exec -n default -it appsody-operator-5d6d9f977-qsk7s -- /bin/printenv WATCH_NAMESPACE
-Attempting to get resource from Kubernetes ...
-Running command: kubectl get deployments -o=jsonpath='{.items[?(@.metadata.name=="appsody-operator")].metadata.namespace}' -n kabanero
-Attempting to get resource from Kubernetes ...
-Running command: kubectl get pod -o=jsonpath='{.items[?(@.metadata.labels.name=="appsody-operator")].metadata.name}' -n kabanero
-Attempting to get resource from Kubernetes ...
-Running command: kubectl exec -n kabanero -it appsody-operator-549fd759c8-4m8xz -- /bin/printenv WATCH_NAMESPACE
-Attempting to apply resource in Kubernetes ...
-Running command: kubectl apply -f /Users/phil/.appsody/deploy/appsody-app-crd.yaml --namespace labproj01
-Attempting to apply resource in Kubernetes ...
-Running command: kubectl apply -f /Users/phil/.appsody/deploy/appsody-app-operator.yaml --namespace labproj01
-Appsody operator deployed to Kubernetes
-Found existing deployment manifest app-deploy.yaml
-Extracting project from development environment
-Pulling docker image kabanero/nodejs-express:0.2
-Running command: docker pull kabanero/nodejs-express:0.2
-0.2: Pulling from kabanero/nodejs-express
-Digest: sha256:4ebaf69ff17c011a54f857099ef4fa6ba5042afb91dfcb57df96e2f84cdee4bf
-Status: Image is up to date for kabanero/nodejs-express:0.2
-docker.io/kabanero/nodejs-express:0.2
-[Warning] The stack image does not contain APPSODY_PROJECT_DIR. Using /project
-Running command: docker create --name mynewapp-extract -v /Users/phil/codewind-workspace/mynewapp/:/project/user-app kabanero/nodejs-express:0.2
-Running command: docker cp mynewapp-extract:/project /Users/phil/.appsody/extract/mynewapp
-Running command: docker rm mynewapp-extract -f
-Project extracted to /Users/phil/.appsody/extract/mynewapp
-Running docker command: docker build -t docker-registry.default.svc:5000/default/mynewapp -f /Users/phil/.appsody/extract/mynewapp/Dockerfile /Users/phil/.appsody/extract/mynewapp
-[Docker] Sending build context to Docker daemon  902.1kB
-[Docker] Step 1/21 : FROM registry.access.redhat.com/ubi8/nodejs-10
-[Docker]  ---> 3ae83c2d8d1a
-[Docker] Step 2/21 : USER root
-[Docker]  ---> Using cache
-[Docker]  ---> 1d1b6aff1c8d
-[Docker] Step 3/21 : RUN yum upgrade --disableplugin=subscription-manager -y  && yum clean --disableplugin=subscription-manager packages  && echo 'Finished installing dependencies'
-[Docker]  ---> Using cache
-[Docker]  ---> 98eff82f0d39
-[Docker] Step 4/21 : RUN groupadd --gid 1000 node   && useradd --uid 1000 --gid node --shell /bin/bash --create-home node
-[Docker]  ---> Using cache
-[Docker]  ---> 39372e60f258
-[Docker] Step 5/21 : RUN yum install --disableplugin=subscription-manager python2 -y
-[Docker]  ---> Using cache
-[Docker]  ---> 8094e26b6438
-[Docker] Step 6/21 : RUN ln -s /usr/bin/python2 /usr/bin/python
-[Docker]  ---> Using cache
-[Docker]  ---> e7ce525d6f36
-[Docker] Step 7/21 : WORKDIR /project
-[Docker]  ---> Using cache
-[Docker]  ---> e0b3f711148c
-[Docker] Step 8/21 : COPY ./package*.json ./
-[Docker]  ---> Using cache
-[Docker]  ---> 852ff1ac0d32
-[Docker] Step 9/21 : RUN npm install --production
-[Docker]  ---> Using cache
-[Docker]  ---> abf048c307f3
-[Docker] Step 10/21 : WORKDIR /project/user-app
-[Docker]  ---> Using cache
-[Docker]  ---> 170446d76d2d
-[Docker] Step 11/21 : COPY ./user-app/package*.json ./
-[Docker]  ---> Using cache
-[Docker]  ---> bca89831f834
-[Docker] Step 12/21 : RUN npm install --production
-[Docker]  ---> Using cache
-[Docker]  ---> 8836c94ce59b
-[Docker] Step 13/21 : COPY . /project
-[Docker]  ---> eae09d1f12db
-[Docker] Step 14/21 : RUN chown -hR node:node /project
-[Docker]  ---> Running in d008e60c25de
-[Docker] Removing intermediate container d008e60c25de
-[Docker]  ---> 4f573cf96fa6
-[Docker] Step 15/21 : WORKDIR /project
-[Docker]  ---> Running in 62e9b64e60b6
-[Docker] Removing intermediate container 62e9b64e60b6
-[Docker]  ---> baabf47d9194
-[Docker] Step 16/21 : ENV NODE_PATH=/project/user-app/node_modules
-[Docker]  ---> Running in 0d30bc712eb2
-[Docker] Removing intermediate container 0d30bc712eb2
-[Docker]  ---> e4a06e83d553
-[Docker] Step 17/21 : ENV NODE_ENV production
-[Docker]  ---> Running in 1df89cd9473a
-[Docker] Removing intermediate container 1df89cd9473a
-[Docker]  ---> 0b0a7d541780
-[Docker] Step 18/21 : ENV PORT 3000
-[Docker]  ---> Running in 074949cb782c
-[Docker] Removing intermediate container 074949cb782c
-[Docker]  ---> 8735555ed8f6
-[Docker] Step 19/21 : USER node
-[Docker]  ---> Running in f1a85200f2d3
-[Docker] Removing intermediate container f1a85200f2d3
-[Docker]  ---> c009a9edd0bf
-[Docker] Step 20/21 : EXPOSE 3000
-[Docker]  ---> Running in 50066686986d
-[Docker] Removing intermediate container 50066686986d
-[Docker]  ---> ca6547cce0ec
-[Docker] Step 21/21 : CMD ["npm", "start"]
-[Docker]  ---> Running in 44e91501c661
-[Docker] Removing intermediate container 44e91501c661
-[Docker]  ---> 93a76d6a1303
-[Docker] Successfully built 93a76d6a1303
-[Docker] Successfully tagged docker-registry.default.svc:5000/default/mynewapp:latest
-Built docker image docker-registry.default.svc:5000/default/mynewapp
-Using applicationImage of: docker-registry.default.svc:5000/default/mynewapp
-Attempting to apply resource in Kubernetes ...
-Running command: kubectl apply -f app-deploy.yaml --namespace labproj01
-Deployment succeeded.
-Appsody Deployment name is: mynewapp
-Running command: kubectl get rt mynewapp -o jsonpath="{.status.url}" --namespace labproj01
-Attempting to get resource from Kubernetes ...
-Running command: kubectl get route mynewapp -o jsonpath={.status.ingress[0].host} --namespace labproj01
-Deployed project running at mynewapp-labproj01.apps.158.176.105.11.xip.io
-Using applicationImage of: docker-registry-default.apps.158.176.105.11.xip.io/labproj01/mynewapp
-Pushing docker image docker-registry-default.apps.158.176.105.11.xip.io/labproj01/mynewapp
+appsody deploy -t docker-registry-default.apps.<infraIP@>.xip.io/labproj<xx>/mynewapp --push --pull-url docker-registry.default.svc:5000 -n labproj<xx>
 ```
 
 
 
-> If you receive an error message with X509,  you must add the **client-ca.crt** certificate on your system. This file is in the github in the same repository. 
+Results (example)
+
+```
+...
+Successfully built e205b6314730
+[Docker] Successfully tagged docker-registry-default.apps.158.176.135.51.xip.io/labproj01/mynewapp:latest
+Pushing image docker-registry-default.apps.158.176.135.51.xip.io/labproj01/mynewapp
+Built docker image docker-registry-default.apps.158.176.135.51.xip.io/labproj01/mynewapp
+Found existing deployment manifest /Users/phil/codewind-workspace/mynewapp/app-deploy.yaml
+Updated existing deployment manifest /Users/phil/codewind-workspace/mynewapp/app-deploy.yaml
+Attempting to get resource from Kubernetes ...
+Running command: kubectl get pods -o=jsonpath='{.items[?(@.metadata.labels.name=="appsody-operator")].metadata.namespace}' --all-namespaces
+Attempting to get resource from Kubernetes ...
+Running command: kubectl get deployments -o=jsonpath='{.items[?(@.metadata.name=="appsody-operator")].metadata.namespace}' -n adminproj
+Attempting to get resource from Kubernetes ...
+Running command: kubectl get pod -o=jsonpath='{.items[?(@.metadata.labels.name=="appsody-operator")].metadata.name}' -n adminproj
+Attempting to get resource from Kubernetes ...
+Running command: kubectl exec -n adminproj -it appsody-operator-67dfc7bc59-5xxch -- /bin/printenv WATCH_NAMESPACE
+Attempting to apply resource in Kubernetes ...
+Running command: kubectl apply -f /Users/phil/codewind-workspace/theapp/app-deploy.yaml --namespace labproj01
+Appsody Deployment name is: theapp
+Running command: kubectl get rt theapp -o jsonpath="{.status.url}" --namespace labproj01
+Attempting to get resource from Kubernetes ...
+Running command: kubectl get route theapp -o jsonpath={.status.ingress[0].host} --namespace labproj01
+Deployed project running at mynewapp-labproj01.apps.158.176.135.51.xip.io
+```
+
+
+
+> If you receive an error message with X509,  you must add the **client-ca.crt** certificate on your system. This file is in the github in the same repository. Be sure to restart Docker after adding the certificate.
 
 
 
@@ -766,6 +688,72 @@ http://mynewapp-labproj<xx>.apps.<infraIP@>.xip.io
 You successfully installed and used Appsody, Kabanero and Codewind ! You used most of the features concerning Codewind and Appsody. These tools are solving a lot of complexity for the developers. 
 
 **Congratulations**
+
+
+
+## Appendix - Get the certificate (registry security)
+
+Instead of copying the certificate (**client-ca.crt** from the GitHub or from the master in **/etc/origin/node/client-ca.crt** ), you can also import the certificate by using **FireFox**.
+
+
+
+Folow the steps:
+
+1- Open a **FireFox** browser and type the following URL (don't forget the /v2 at the end) :
+
+```
+https://docker-registry-default.apps.<infraIP@>.xip.io/v2
+```
+
+![image-20200229145302968](images/image-20200229145302968.png)
+
+A message showing UNAUTHORIZED will appear.
+
+
+
+2- Click on the **locker**
+
+![image-20200229145738625](images/image-20200229145738625-2984658.png)
+
+
+
+3- Click on **Connection not secure**
+
+![image-20200229145830622](images/image-20200229145830622-2984710.png)
+
+
+
+
+
+4- Click on **More information**
+
+![image-20200229150032447](images/image-20200229150032447-2984832.png)
+
+5- Click on **View Certificate**
+
+![image-20200229150255926](images/image-20200229150255926-2984976.png)
+
+
+
+6- Click on Download PEM(cert)
+
+![image-20200229150346039](images/image-20200229150346039-2985026.png) 
+
+
+
+7- Then Save
+
+![image-20200229150514100](images/image-20200229150514100-2985114.png)
+
+
+
+8- Then **Double-Click on the pem file** and add it to the security system.
+
+Depending on the OS used (Windows or MacOS), the procedure will vary.
+
+
+
+9- **Restart Docker** and **restart your terminal** (or command line window)
 
 
 
