@@ -45,7 +45,7 @@ As an example:
 
 
 
-Take a note of the instructor line and happend this line in your **laptop /etc/hosts** file:
+Take a note of the instructor line and append this line in your **laptop /etc/hosts** file:
 
 
 
@@ -125,7 +125,7 @@ This link is very practical to download both the **oc** and the associated **kub
 
 ### 2. Move the binaries to the right directory
 
-If you use **MacOS** or Linux, complete the following steps to add the binaries to your `PATH` system variable. If you use **Windows**, install the `oc` CLI in the same directory as the IBM Cloud CLI or any other directory that is listed in your `PATH`  system variables. This setup saves you some file path changes when you run commands later.
+If you use **MacOS** or Linux, complete the following steps to add the binaries to your `PATH` system variable. If you use **Windows**, install the `oc` CLI in any other directory that is listed in your `PATH`  system variables. This setup saves you some file path changes when you run commands later.
 
 
 
@@ -281,7 +281,6 @@ You noticed the following details:
 - easy to install for the oc CLI
 - easy to access the OpenShift web console
 - easy to build and deploy a simple application with the console.
-
 
 
 
